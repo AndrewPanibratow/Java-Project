@@ -1,11 +1,12 @@
 package com.website.hotel.repositories;
 
 import com.website.hotel.domain.User;
+import org.springframework.data.domain.Example;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
-public interface UserRepository {
-     Integer create(String Name, String Surname, String Email, String Login, String Password);
-     User findById(int Id);
-     Integer findByLoginAndPassword(String Login, String Password);
-     Integer FindByLogin(String Login);
-     Integer FindByEmail(String Email);
+import java.util.Optional;
+
+public interface UserRepository extends JpaRepository<User, Integer> {
+
 }

@@ -1,14 +1,25 @@
 package com.website.hotel.domain;
 
-import javax.swing.*;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.swing.*;
+@Entity
 public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int Id;
     private String Name;
     private String Surname;
     private String Email;
     private String Login;
     private String Password;
+    public User(){
+
+    }
     public User(Integer Id, String Name, String Surname, String Email, String Login, String Password){
         this.Id = Id;
         this.Name = Name;
