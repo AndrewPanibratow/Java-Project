@@ -2,25 +2,24 @@ package com.website.hotel.domain;
 
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.swing.*;
+
 @Entity
-public class User {
+@Table(name = "User")
+public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int Id;
+    private Long Id;
     private String Name;
     private String Surname;
     private String Email;
     private String Login;
     private String Password;
-    public User(){
+    public UserEntity(){
 
     }
-    public User(Integer Id, String Name, String Surname, String Email, String Login, String Password){
+    public UserEntity(Long Id, String Name, String Surname, String Email, String Login, String Password){
         this.Id = Id;
         this.Name = Name;
         this.Surname = Surname;
@@ -29,11 +28,11 @@ public class User {
         this.Password = Password;
     }
 
-    public int getId() {
+    public long getId() {
         return Id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         Id = id;
     }
 

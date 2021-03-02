@@ -1,6 +1,6 @@
 package com.website.hotel.resources;
 
-import com.website.hotel.domain.User;
+import com.website.hotel.domain.UserEntity;
 import com.website.hotel.services.UserService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,9 +18,9 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public User registerUser (@RequestBody User userMap)
+    public UserEntity registerUser (@RequestBody UserEntity userEntityMap)
     {
-        userService.registerUser(userMap);
-        return userMap;
+        userService.registerUser(userEntityMap);
+        return userEntityMap;
     }
 }

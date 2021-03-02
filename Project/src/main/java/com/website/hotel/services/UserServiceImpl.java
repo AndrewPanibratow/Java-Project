@@ -1,6 +1,6 @@
 package com.website.hotel.services;
 
-import com.website.hotel.domain.User;
+import com.website.hotel.domain.UserEntity;
 import com.website.hotel.exceptions.AtAuthException;
 import com.website.hotel.repositories.UserRepository;
 import org.springframework.stereotype.Service;
@@ -20,14 +20,14 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public User validateUser(String login, String Password) throws AtAuthException {
+    public UserEntity validateUser(String login, String Password) throws AtAuthException {
         return null;
     }
 
     @Override
-    public User registerUser(User user) throws AtAuthException {
+    public UserEntity registerUser(UserEntity userEntity) throws AtAuthException {
        Pattern p = Pattern.compile("^.+@.+\\..{0,4}$");
-       if(!p.matcher(user.getEmail()).matches())
+       if(!p.matcher(userEntity.getEmail()).matches())
           throw  new AtAuthException("Not valid Email");
       //if(userRepository.FindByLogin(Login) > 0)
           //  throw  new AtAuthException("Login already is used");
@@ -37,10 +37,10 @@ public class UserServiceImpl implements UserService {
        // if(userRepository.FindByEmail(Email) > 0)
         //    throw  new AtAuthException("Email already is used");
 
-        if(user == null)
+        if(userEntity == null)
             throw new AtAuthException("Not valid Email");
-        userRepository.save(user);
+        userRepository.save(userEntity);
 
-        return user;
+        return userEntity;
     }
 }

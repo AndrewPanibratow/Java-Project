@@ -29,6 +29,9 @@ CREATE TABLE `booking` (
   `RoomId` int NOT NULL,
   `Booking_date` date NOT NULL,
   `Days` tinyint NOT NULL,
+  `hotel_id` bigint NOT NULL,
+  `room_id` bigint NOT NULL,
+  `user_id` bigint NOT NULL,
   PRIMARY KEY (`Id`),
   KEY `UserId` (`UserId`),
   KEY `HotelId` (`HotelId`),
@@ -57,4 +60,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-02-24 18:53:33
+-- Dump completed on 2021-03-02 14:07:10
