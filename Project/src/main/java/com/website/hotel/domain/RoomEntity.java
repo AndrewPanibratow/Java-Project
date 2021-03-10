@@ -13,7 +13,9 @@ public class RoomEntity {
     float price;
     String Room_type;
     int Beds_count;
+public RoomEntity(){
 
+}
     public RoomEntity(long id, float price, String room_type, int beds_count) {
         Id = id;
         this.price = price;
