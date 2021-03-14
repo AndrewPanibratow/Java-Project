@@ -27,7 +27,7 @@ CREATE TABLE `room` (
   `HotelId` int NOT NULL,
   `Price` float NOT NULL,
   `Room_type` varchar(50) DEFAULT NULL,
-  `Beds_count` int DEFAULT NULL,
+  `Beds_count` int NOT NULL,
   PRIMARY KEY (`Id`),
   KEY `HotelId` (`HotelId`),
   CONSTRAINT `room_ibfk_1` FOREIGN KEY (`HotelId`) REFERENCES `hotel` (`Id`)
@@ -52,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-03-02 14:07:10
+-- Dump completed on 2021-03-14 13:42:56

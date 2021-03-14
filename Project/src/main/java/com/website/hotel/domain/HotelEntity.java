@@ -8,47 +8,52 @@ public class HotelEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    long Id;
-    String Name;
-    String Country;
-    int Rooms_count;
-    public HotelEntity(){}
-    public HotelEntity(Long Id, String Name, String Country, int Rooms_count)
-    {
-        this.Id = Id;
-        this.Name = Name;
-        this.Country = Country;
-        this.Rooms_count = Rooms_count;
+    long id;
+    String name;
+    String country;
+
+    String address;
+    public HotelEntity(long id, String name, String country, int rooms_count, String address) {
+        this.id = id;
+        this.name = name;
+        this.country = country;
+        this.address = address;
     }
+
+    public HotelEntity(){}
+
     public long getId() {
-        return Id;
+        return id;
     }
 
     public void setId(long id) {
-        Id = id;
+        this.id = id;
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public void setName(String name) {
-        Name = name;
+        this.name = name;
     }
 
     public String getCountry() {
-        return Country;
+        return country;
     }
 
     public void setCountry(String country) {
-        Country = country;
+        this.country = country;
     }
 
-    public int getRooms_count() {
-        return Rooms_count;
+    public String getAddress() {
+        return address;
     }
 
-    public void setRooms_count(int rooms_count) {
-        Rooms_count = rooms_count;
+    public void setAddress(String address) {
+        this.address = address;
     }
+
+
+
 }

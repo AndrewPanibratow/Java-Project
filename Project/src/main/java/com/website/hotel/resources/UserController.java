@@ -2,6 +2,7 @@ package com.website.hotel.resources;
 
 import com.website.hotel.domain.UserEntity;
 import com.website.hotel.services.UserService;
+import org.apache.catalina.User;
 import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,5 +33,15 @@ public class UserController {
          return "User with login "+ data.get("login")+ " was deleted";
      else
          return "User doesn\'t register";
+    }
+    @PostMapping("/login")
+    public String LoginUser(@RequestBody Map<String, String> data){
+        String login = data.get("login");
+        String password = DigestUtils.md5DigestAsHex(data.get("password").getBytes());
+        UserEntity user = userService.validateUser(login, password);
+        if(user != null)
+            return "You login as "+user.getName() + " "+user.getSurname();
+        else
+            return "Not valid login or password";
     }
 }

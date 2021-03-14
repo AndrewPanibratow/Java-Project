@@ -8,69 +8,69 @@ import java.util.Date;
 public class BookingEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    long Id;
-    long UserId;
-    long HotelId;
-    long RoomId;
-    Date Booking_date;
-    int Days;
+    long id;
+    long userId;
+    long hotelId;
+    long roomId;
+    Date booking_date;
+    int days;
 
-    public BookingEntity(){}
     public BookingEntity(long id, long userId, long hotelId, long roomId, Date booking_date, int days) {
-        Id = id;
-        UserId = userId;
-        HotelId = hotelId;
-        RoomId = roomId;
-        Booking_date = booking_date;
-        Days = days;
+        this.id = id;
+        this.userId = userId;
+        this.hotelId = hotelId;
+        this.roomId = roomId;
+        this.booking_date = booking_date;
+        this.days = days;
     }
 
+    public BookingEntity(){}
     public long getId() {
-        return Id;
+        return id;
     }
 
     public void setId(long id) {
-        Id = id;
+        this.id = id;
     }
 
     public long getUserId() {
-        return UserId;
+        return userId;
     }
 
     public void setUserId(long userId) {
-        UserId = userId;
+        this.userId = userId;
     }
 
     public long getHotelId() {
-        return HotelId;
+        return hotelId;
     }
 
     public void setHotelId(long hotelId) {
-        HotelId = hotelId;
+        this.hotelId = hotelId;
     }
 
     public long getRoomId() {
-        return RoomId;
+        return roomId;
     }
 
     public void setRoomId(long roomId) {
-        RoomId = roomId;
+        this.roomId = roomId;
     }
 
     public Date getBooking_date() {
-        return Booking_date;
+        return booking_date;
     }
 
     public void setBooking_date(Date booking_date) {
-        Booking_date = booking_date;
+        this.booking_date = booking_date;
     }
 
     public int getDays() {
-        return Days;
+        return days;
     }
 
     public void setDays(int days) {
-        Days = days;
+        this.days = days;
     }
 
 }
