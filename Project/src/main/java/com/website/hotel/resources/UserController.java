@@ -29,7 +29,7 @@ public class UserController {
     {
         String login = data.get("login");
         String password = DigestUtils.md5DigestAsHex(data.get("password").getBytes());
-     if(userService.RemoveUser(login,password))
+     if(userService.removeUser(login,password))
          return "User with login "+ data.get("login")+ " was deleted";
      else
          return "User doesn\'t register";

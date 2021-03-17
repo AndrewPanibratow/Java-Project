@@ -51,7 +51,7 @@ public class UserServiceImpl implements UserService {
 
         return userRepository.save(userEntity);
     }
-    public boolean RemoveUser(String login, String password)
+    public boolean removeUser(String login, String password)
     {
         UserEntity user = validateUser(login, password);
         if(user == null)

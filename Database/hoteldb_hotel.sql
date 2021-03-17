@@ -26,19 +26,10 @@ CREATE TABLE `hotel` (
   `Id` int NOT NULL AUTO_INCREMENT,
   `Name` varchar(50) NOT NULL,
   `Country` varchar(50) NOT NULL,
-  `Address` varchar(60) DEFAULT NULL,
+  `Address` varchar(60) NOT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `hotel`
---
-
-LOCK TABLES `hotel` WRITE;
-/*!40000 ALTER TABLE `hotel` DISABLE KEYS */;
-/*!40000 ALTER TABLE `hotel` ENABLE KEYS */;
-UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -49,4 +40,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-03-14 13:42:56
+-- Dump completed on 2021-03-17 19:02:51

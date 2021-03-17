@@ -11,7 +11,6 @@ public class HotelEntity {
     long id;
     String name;
     String country;
-
     String address;
     public HotelEntity(long id, String name, String country, int rooms_count, String address) {
         this.id = id;

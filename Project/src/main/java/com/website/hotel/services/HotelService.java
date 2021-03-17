@@ -6,7 +6,8 @@ import com.website.hotel.domain.RoomEntity;
 
 public interface HotelService {
     HotelEntity AddHotel(HotelEntity hotel);
-    HotelEntity AddRoom(RoomEntity room);
+    RoomEntity AddRoom(RoomEntity room);
     BookingEntity BookingRoom(BookingEntity bookingEntity);
+
 
 }

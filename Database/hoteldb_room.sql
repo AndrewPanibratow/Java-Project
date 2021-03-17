@@ -24,24 +24,15 @@ DROP TABLE IF EXISTS `room`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `room` (
   `Id` int NOT NULL AUTO_INCREMENT,
-  `HotelId` int NOT NULL,
+  `Hotel_id` int NOT NULL,
   `Price` float NOT NULL,
   `Room_type` varchar(50) DEFAULT NULL,
   `Beds_count` int NOT NULL,
   PRIMARY KEY (`Id`),
-  KEY `HotelId` (`HotelId`),
-  CONSTRAINT `room_ibfk_1` FOREIGN KEY (`HotelId`) REFERENCES `hotel` (`Id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `HotelId` (`Hotel_id`),
+  CONSTRAINT `room_ibfk_1` FOREIGN KEY (`Hotel_id`) REFERENCES `hotel` (`Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `room`
---
-
-LOCK TABLES `room` WRITE;
-/*!40000 ALTER TABLE `room` DISABLE KEYS */;
-/*!40000 ALTER TABLE `room` ENABLE KEYS */;
-UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -52,4 +43,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-03-14 13:42:56
+-- Dump completed on 2021-03-17 19:02:52
