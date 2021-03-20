@@ -1,6 +1,9 @@
 package com.website.hotel.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
+import java.util.Calendar;
 import java.util.Date;
 
 @Entity
@@ -12,19 +15,25 @@ public class BookingEntity {
     long userId;
     long hotelId;
     long roomId;
-    Date booking_date;
-    int days;
 
-    public BookingEntity(long id, long userId, long hotelId, long roomId, Date booking_date, int days) {
+    @Column(name="Start_date")
+    @JsonFormat(pattern="dd.MM.yyyy")
+    Date startDate;
+    @Column(name="End_date")
+    @JsonFormat(pattern="dd.MM.yyyy")
+    Date endDate;
+
+    public BookingEntity(long id, long userId, long hotelId, long roomId, Date startDate, Calendar endDate) {
         this.id = id;
         this.userId = userId;
         this.hotelId = hotelId;
         this.roomId = roomId;
-        this.booking_date = booking_date;
-        this.days = days;
+        startDate = startDate;
+        endDate = endDate;
     }
 
-    public BookingEntity(){}
+    public BookingEntity(){ }
+
     public long getId() {
         return id;
     }
@@ -56,21 +65,20 @@ public class BookingEntity {
     public void setRoomId(long roomId) {
         this.roomId = roomId;
     }
-
-    public Date getBooking_date() {
-        return booking_date;
+    public Date getStartDate() {
+        return startDate;
     }
 
-    public void setBooking_date(Date booking_date) {
-        this.booking_date = booking_date;
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
     }
 
-    public int getDays() {
-        return days;
+    public Date getEndDate() {
+        return endDate;
     }
 
-    public void setDays(int days) {
-        this.days = days;
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
     }
 
 }

@@ -1,5 +1,6 @@
 package com.website.hotel.resources;
 
+import com.website.hotel.domain.BookingEntity;
 import com.website.hotel.domain.HotelEntity;
 import com.website.hotel.domain.RoomEntity;
 import com.website.hotel.domain.UserEntity;
@@ -26,5 +27,10 @@ public class HotelController {
     public RoomEntity addRoom(@RequestBody RoomEntity roomEntityMap)
     {
         return hotelService.AddRoom(roomEntityMap);
+    }
+    @PostMapping("/addbooking")
+    public BookingEntity addBooking(@RequestBody BookingEntity bookingEntityMap)
+    {
+        return hotelService.BookingRoom(bookingEntityMap);
     }
 }

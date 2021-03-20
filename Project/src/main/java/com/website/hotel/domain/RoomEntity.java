@@ -11,14 +11,16 @@ public class RoomEntity {
     long id;
     long hotelId;
     float price;
-    String room_type;
-    int beds_count;
-    public RoomEntity(long id,long hotelId, float price, String room_type, int beds_count) {
+    @Column(name="Room_type")
+    String roomType;
+    @Column(name = "Beds_count")
+    int bedsCount;
+    public RoomEntity(long id,long hotelId, float price, String roomType, int bedsCount) {
         this.id = id;
         this.hotelId = hotelId;
         this.price = price;
-        this.room_type = room_type;
-        this.beds_count = beds_count;
+        this.roomType = roomType;
+        this.bedsCount = bedsCount;
     }
 
     public RoomEntity(){
@@ -48,20 +50,20 @@ public class RoomEntity {
         this.price = price;
     }
 
-    public String getRoom_type() {
-        return room_type;
+    public String getRoomType() {
+        return roomType;
     }
 
-    public void setRoom_type(String room_type) {
-        this.room_type = room_type;
+    public void setRoomType(String room_type) {
+        this.roomType = room_type;
     }
 
-    public int getBeds_count() {
-        return beds_count;
+    public int getBedsCount() {
+        return bedsCount;
     }
 
-    public void setBeds_count(int beds_count) {
-        this.beds_count = beds_count;
+    public void setBedsCount(int beds_count) {
+        this.bedsCount = beds_count;
     }
 
 

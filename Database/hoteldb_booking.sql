@@ -16,31 +16,14 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `booking`
+-- Dumping data for table `booking`
 --
 
-DROP TABLE IF EXISTS `booking`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `booking` (
-  `Id` int NOT NULL AUTO_INCREMENT,
-  `UserId` int NOT NULL,
-  `HotelId` int NOT NULL,
-  `RoomId` int NOT NULL,
-  `Booking_date` date NOT NULL,
-  `Days` tinyint NOT NULL,
-  `hotel_id` bigint NOT NULL,
-  `room_id` bigint NOT NULL,
-  `user_id` bigint NOT NULL,
-  PRIMARY KEY (`Id`),
-  KEY `UserId` (`UserId`),
-  KEY `HotelId` (`HotelId`),
-  KEY `RoomId` (`RoomId`),
-  CONSTRAINT `booking_ibfk_1` FOREIGN KEY (`UserId`) REFERENCES `user` (`Id`),
-  CONSTRAINT `booking_ibfk_2` FOREIGN KEY (`HotelId`) REFERENCES `hotel` (`Id`),
-  CONSTRAINT `booking_ibfk_3` FOREIGN KEY (`RoomId`) REFERENCES `room` (`Id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+LOCK TABLES `booking` WRITE;
+/*!40000 ALTER TABLE `booking` DISABLE KEYS */;
+INSERT INTO `booking` VALUES (3,6,2,1,'2021-02-01','2021-02-03');
+/*!40000 ALTER TABLE `booking` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -51,4 +34,4 @@ CREATE TABLE `booking` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-03-17 19:02:52
+-- Dump completed on 2021-03-20 20:45:41
