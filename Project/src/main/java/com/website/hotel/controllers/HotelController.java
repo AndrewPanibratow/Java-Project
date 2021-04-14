@@ -1,15 +1,10 @@
-package com.website.hotel.resources;
+package com.website.hotel.controllers;
 
 import com.website.hotel.domain.BookingEntity;
 import com.website.hotel.domain.HotelEntity;
 import com.website.hotel.domain.RoomEntity;
-import com.website.hotel.domain.UserEntity;
 import com.website.hotel.services.HotelService;
-import com.website.hotel.services.UserService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/hotel")
@@ -32,5 +27,17 @@ public class HotelController {
     public BookingEntity addBooking(@RequestBody BookingEntity bookingEntityMap)
     {
         return hotelService.BookingRoom(bookingEntityMap);
+    }
+    @PostMapping("/removehotel")
+    public String removeHotel(@RequestBody int id){
+        if(hotelService.RemoveHotel(id))
+            return "Hotel was removed";
+        return "Hotel not found";
+    }
+    @PostMapping("/removeroom")
+    public String removeRoom(@RequestBody int id){
+        if(hotelService.RemoveRoom(id))
+            return "Room was removed";
+        return "Room not found";
     }
 }

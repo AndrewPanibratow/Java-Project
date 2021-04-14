@@ -8,6 +8,6 @@ public interface HotelService {
     HotelEntity AddHotel(HotelEntity hotel);
     RoomEntity AddRoom(RoomEntity room);
     BookingEntity BookingRoom(BookingEntity bookingEntity);
-
-
+    Boolean RemoveHotel(long id);
+    Boolean RemoveRoom(long id);
 }

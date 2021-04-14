@@ -1,8 +1,7 @@
-package com.website.hotel.resources;
+package com.website.hotel.controllers;
 
 import com.website.hotel.domain.UserEntity;
 import com.website.hotel.services.UserService;
-import org.apache.catalina.User;
 import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.*;
 

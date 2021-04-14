@@ -1,6 +1,9 @@
 package com.website.hotel.domain;
 
+import com.sun.istack.NotNull;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "Hotel")
@@ -9,8 +12,14 @@ public class HotelEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
+    @NotBlank(message = "Name is required!")
+    @NotNull()
     String name;
+    @NotBlank(message = "Country name is required!")
+    @NotNull()
     String country;
+    @NotBlank(message = "Address is required!")
+    @NotNull()
     String address;
     public HotelEntity(long id, String name, String country, int rooms_count, String address) {
         this.id = id;

@@ -59,4 +59,22 @@ public class HotelServiceImpl implements  HotelService {
      }
      return bookingRepository.save(bookingEntity);
     }
+
+    @Override
+    public Boolean RemoveHotel(long id) {
+        Optional<HotelEntity> hotelEntity = hotelRepository.findById(id);
+        if(!hotelEntity.isPresent())
+            return false;
+        hotelRepository.delete(hotelEntity.get());
+        return true;
+    }
+
+    @Override
+    public Boolean RemoveRoom(long id) {
+        Optional<RoomEntity> roomEntity = roomRepository.findById(id);
+        if(!roomEntity.isPresent())
+            return false;
+        roomRepository.delete(roomEntity.get());
+        return true;
+    }
 }

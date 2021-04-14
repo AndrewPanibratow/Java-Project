@@ -1,9 +1,11 @@
 package com.website.hotel.domain;
 
-import org.springframework.boot.autoconfigure.domain.EntityScan;
+import com.sun.istack.NotNull;
 
 import javax.persistence.*;
-import javax.swing.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "User")
@@ -11,10 +13,19 @@ public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotBlank(message = "Name is required!")
+    @NotNull()
     private String name;
+    @NotBlank(message = "Surname is required!")
+    @NotNull()
     private String surname;
+    @Pattern(regexp = "^\\w+@[A-BZa-z]+\\.[a-z]{0,4}$", message = "Not valid email!")
     private String email;
+    @NotBlank(message = "Login is required!")
+    @NotNull()
     private String login;
+    @Size(min = 5, message = "Password must have at least 5 symbols!")
+    @NotNull()
     private String password;
     public UserEntity(Long id, String name, String surname, String email, String login, String password) {
         this.id = id;

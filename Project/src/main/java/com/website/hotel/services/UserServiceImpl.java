@@ -33,7 +33,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserEntity registerUser(UserEntity userEntity) throws AtAuthException {
         userEntity.setPassword(DigestUtils.md5DigestAsHex(userEntity.getPassword().getBytes()));
-       Pattern p = Pattern.compile("^.+@.+\\..{0,4}$");
+       Pattern p = Pattern.compile("^\\w+@[A-Za-z]+\\.[a-z]{0,4}$");
        if(!p.matcher(userEntity.getEmail()).matches())
           throw  new AtAuthException("Not valid Email");
 
@@ -45,9 +45,6 @@ public class UserServiceImpl implements UserService {
 
        if(userRepository.findByEmail(userEntity.getEmail()).isPresent())
          throw  new AtAuthException("Email already is used");
-
-        if(userEntity == null)
-            throw new AtAuthException("Not valid Email");
 
         return userRepository.save(userEntity);
     }
