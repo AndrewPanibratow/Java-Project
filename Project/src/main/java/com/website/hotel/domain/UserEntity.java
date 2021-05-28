@@ -6,6 +6,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Entity
 @Table(name = "User")
@@ -27,16 +28,29 @@ public class UserEntity {
     @Size(min = 5, message = "Password must have at least 5 symbols!")
     @NotNull()
     private String password;
-    public UserEntity(Long id, String name, String surname, String email, String login, String password) {
+    @NotNull
+    @Column(name="RoleId")
+    private long RoleId;
+    @ManyToOne()
+    @JoinColumn(name = "roles_id")
+    RoleEntity role;
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "booking_UserId")
+    List<BookingEntity> booking;
+
+    public UserEntity(Long id, String name, String surname, String email, String login, String password, long RoleId) {
         this.id = id;
         this.name = name;
         this.surname = surname;
         this.email = email;
         this.login = login;
         this.password = password;
+        this.RoleId = RoleId;
     }
 
+    public UserEntity(){
 
+    }
 
     public Long getId() {
         return id;
@@ -86,11 +100,19 @@ public class UserEntity {
         this.password = password;
     }
 
-
-    public UserEntity(){
-
+    public long getRoleId() {
+        return RoleId;
     }
 
+    public void setRoleId(long roleId) {
+        RoleId = roleId;
+    }
 
+    public RoleEntity getRole() {
+        return role;
+    }
 
+    public List<BookingEntity> getBooking() {
+        return booking;
+    }
 }

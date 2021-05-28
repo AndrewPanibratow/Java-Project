@@ -4,6 +4,7 @@ import com.sun.istack.NotNull;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.List;
 
 @Entity
 @Table(name = "Hotel")
@@ -21,12 +22,21 @@ public class HotelEntity {
     @NotBlank(message = "Address is required!")
     @NotNull()
     String address;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "booking_HotelId")
+    List<BookingEntity> booking;
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "room_HotelId")
+    List<RoomEntity> rooms;
+
     public HotelEntity(long id, String name, String country, int rooms_count, String address) {
         this.id = id;
         this.name = name;
         this.country = country;
         this.address = address;
     }
+
 
     public HotelEntity(){}
 
@@ -62,6 +72,11 @@ public class HotelEntity {
         this.address = address;
     }
 
+    public List<BookingEntity> getBooking() {
+        return booking;
+    }
 
-
+    public List<RoomEntity> getRooms() {
+        return rooms;
+    }
 }

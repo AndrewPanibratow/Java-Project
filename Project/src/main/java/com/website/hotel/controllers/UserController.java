@@ -17,6 +17,10 @@ public class UserController {
         this.userService = userService;
     }
 
+    @PostMapping("/admin")
+    public String Admin(){
+        return "Hello admin!";
+    }
     @PostMapping("/register")
     public UserEntity registerUser (@RequestBody UserEntity userEntityMap)
     {
