@@ -24,15 +24,6 @@ public class BookingEntity {
     @Column(name="EndDate")
     @JsonFormat(pattern="dd.MM.yyyy")
     Date endDate;
-    @ManyToOne()
-    @JoinColumn(name = "user_id")
-    UserEntity user;
-    @ManyToOne()
-    @JoinColumn(name = "hotel_id")
-    HotelEntity hotel;
-    @ManyToOne()
-    @JoinColumn(name = "room_id")
-    RoomEntity room;
 
     public BookingEntity(long id, long userId, long hotelId, long roomId, Date startDate, Calendar endDate) {
         this.id = id;
@@ -92,15 +83,4 @@ public class BookingEntity {
         this.endDate = endDate;
     }
 
-    public UserEntity getUser() {
-        return user;
-    }
-
-    public HotelEntity getHotel() {
-        return hotel;
-    }
-
-    public RoomEntity getRoom() {
-        return room;
-    }
 }

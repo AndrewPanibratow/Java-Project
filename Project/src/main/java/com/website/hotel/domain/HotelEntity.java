@@ -23,13 +23,6 @@ public class HotelEntity {
     @NotNull()
     String address;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "booking_HotelId")
-    List<BookingEntity> booking;
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "room_HotelId")
-    List<RoomEntity> rooms;
-
     public HotelEntity(long id, String name, String country, int rooms_count, String address) {
         this.id = id;
         this.name = name;
@@ -72,11 +65,4 @@ public class HotelEntity {
         this.address = address;
     }
 
-    public List<BookingEntity> getBooking() {
-        return booking;
-    }
-
-    public List<RoomEntity> getRooms() {
-        return rooms;
-    }
 }

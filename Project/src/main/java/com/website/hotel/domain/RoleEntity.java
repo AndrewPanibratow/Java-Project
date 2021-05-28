@@ -14,9 +14,6 @@ public class RoleEntity {
     @NotNull
     String RoleName;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "user_Id")
-    List<UserEntity> users;
     public RoleEntity(long id, String roleName) {
         this.id = id;
         RoleName = roleName;
@@ -38,7 +35,5 @@ public class RoleEntity {
         RoleName = roleName;
     }
 
-    public List<UserEntity> getUsers() {
-        return users;
-    }
+
 }

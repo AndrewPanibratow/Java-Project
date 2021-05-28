@@ -18,13 +18,6 @@ public class RoomEntity {
     @Column(name = "BedsCount")
     int bedsCount;
 
-    @ManyToOne()
-    @JoinColumn(name = "hotel_id")
-    HotelEntity hotelEntity;
-
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "booking_RoomId")
-    List<BookingEntity> booking;
     public RoomEntity(long id,long hotelId, float price, String roomType, int bedsCount) {
         this.id = id;
         this.hotelId = hotelId;
@@ -75,14 +68,4 @@ public class RoomEntity {
     public void setBedsCount(int beds_count) {
         this.bedsCount = beds_count;
     }
-
-    public HotelEntity getHotelEntity() {
-        return hotelEntity;
-    }
-
-    public List<BookingEntity> getBooking() {
-        return booking;
-    }
-
-
 }

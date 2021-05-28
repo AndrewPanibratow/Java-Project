@@ -15,14 +15,16 @@ import java.util.Optional;
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
     UserRepository userRepository;
-
+    RoleRepository roleRepository;
     CustomUserDetailsService(UserRepository userRepository, RoleRepository roleRepository){
         this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
     }
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         UserEntity userEntity = userRepository.findByLogin(s).orElseThrow(()->new UsernameNotFoundException("User not found!"));
-        return new CustomUserDetails(userEntity);
+        RoleEntity roleEntity = roleRepository.findById(userEntity.getRoleId());
+        return new CustomUserDetails(userEntity,roleEntity.getRoleName());
     }
 
 }

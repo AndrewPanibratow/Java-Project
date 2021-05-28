@@ -25,13 +25,13 @@ public class CustomUserDetails implements UserDetails {
     private String login;
     private String password;
     private String Role;
-    CustomUserDetails(UserEntity user){
+    CustomUserDetails(UserEntity user, String Role){
     this.name = user.getName();
     this.surname = user.getSurname();
     this.email = user.getEmail();
     this.login = user.getLogin();
     this.password = user.getPassword();
-    this.Role = user.getRole().getRoleName();
+    this.Role = Role;
     }
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

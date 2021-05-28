@@ -31,12 +31,6 @@ public class UserEntity {
     @NotNull
     @Column(name="RoleId")
     private long RoleId;
-    @ManyToOne()
-    @JoinColumn(name = "roles_id")
-    RoleEntity role;
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "booking_UserId")
-    List<BookingEntity> booking;
 
     public UserEntity(Long id, String name, String surname, String email, String login, String password, long RoleId) {
         this.id = id;
@@ -108,11 +102,4 @@ public class UserEntity {
         RoleId = roleId;
     }
 
-    public RoleEntity getRole() {
-        return role;
-    }
-
-    public List<BookingEntity> getBooking() {
-        return booking;
-    }
 }
