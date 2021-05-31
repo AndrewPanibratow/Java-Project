@@ -26,5 +26,4 @@ public class CustomUserDetailsService implements UserDetailsService {
         RoleEntity roleEntity = roleRepository.findById(userEntity.getRoleId());
         return new CustomUserDetails(userEntity,roleEntity.getRoleName());
     }
-
 }

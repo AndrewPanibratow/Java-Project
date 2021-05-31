@@ -2,17 +2,20 @@ package com.website.hotel.controllers;
 
 import com.website.hotel.domain.UserEntity;
 import com.website.hotel.services.UserService;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
 @RestController
+@Secured(value = "none")
 @RequestMapping("/api/users")
 public class UserController {
 
     final UserService userService;
-
     public UserController(UserService userService) {
         this.userService = userService;
     }

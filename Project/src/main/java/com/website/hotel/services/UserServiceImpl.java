@@ -56,4 +56,5 @@ public class UserServiceImpl implements UserService {
         userRepository.delete(user);
         return true;
     }
+
 }
