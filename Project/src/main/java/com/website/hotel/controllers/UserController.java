@@ -8,11 +8,12 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
 @Secured(value = "none")
-@RequestMapping("/api/users")
+@RequestMapping("/api/user")
 public class UserController {
 
     final UserService userService;
@@ -24,6 +25,7 @@ public class UserController {
     public String Admin(){
         return "Hello admin!";
     }
+
     @PostMapping("/register")
     public UserEntity registerUser (@RequestBody UserEntity userEntityMap)
     {
@@ -49,5 +51,18 @@ public class UserController {
             return "You login as "+user.getName() + " "+user.getSurname();
         else
             return "Not valid login or password";
+    }
+    @PostMapping("/getAllUser")
+    public List<UserEntity> getUsers(){
+        return userService.getAllUser();
+    }
+
+    @GetMapping("/welcomePage")
+    public String welcomePage(){
+        StringBuilder sb = new StringBuilder();
+        sb.append("<h1>Hello ");
+        sb.append(SecurityContextHolder.getContext().getAuthentication().getName()+"</h1>");
+        sb.append("<a href=\"\\logout\">logout</a>");
+        return sb.toString();
     }
 }

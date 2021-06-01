@@ -3,10 +3,12 @@ package com.website.hotel.services;
 import com.website.hotel.domain.UserEntity;
 import com.website.hotel.exceptions.AtAuthException;
 import com.website.hotel.repositories.UserRepository;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.DigestUtils;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.regex.Pattern;
 
@@ -32,7 +34,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserEntity registerUser(UserEntity userEntity) throws AtAuthException {
-        userEntity.setPassword(DigestUtils.md5DigestAsHex(userEntity.getPassword().getBytes()));
+        var PasswordEncoder = new BCryptPasswordEncoder();
+        userEntity.setPassword(PasswordEncoder.encode(userEntity.getPassword()));
        Pattern p = Pattern.compile("^\\w+@[A-Za-z]+\\.[a-z]{0,4}$");
        if(!p.matcher(userEntity.getEmail()).matches())
           throw  new AtAuthException("Not valid Email");
@@ -55,6 +58,11 @@ public class UserServiceImpl implements UserService {
             return false;
         userRepository.delete(user);
         return true;
+    }
+
+    @Override
+    public List<UserEntity> getAllUser() {
+        return userRepository.findAll();
     }
 
 }

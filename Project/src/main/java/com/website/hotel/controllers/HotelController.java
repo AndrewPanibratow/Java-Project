@@ -13,31 +13,35 @@ public class HotelController {
     public HotelController(HotelService hotelService){
         this.hotelService = hotelService;
     }
-    @PostMapping("/addhotel")
+    @PostMapping("/addHotel")
     public HotelEntity addHotel(@RequestBody HotelEntity hotelEntityMap)
     {
         return hotelService.AddHotel(hotelEntityMap);
     }
-    @PostMapping("/addroom")
+    @PostMapping("/addRoom")
     public RoomEntity addRoom(@RequestBody RoomEntity roomEntityMap)
     {
         return hotelService.AddRoom(roomEntityMap);
     }
-    @PostMapping("/addbooking")
+    @PostMapping("/addBooking")
     public BookingEntity addBooking(@RequestBody BookingEntity bookingEntityMap)
     {
         return hotelService.BookingRoom(bookingEntityMap);
     }
-    @PostMapping("/removehotel")
+    @PostMapping("/removeHotel")
     public String removeHotel(@RequestBody int id){
         if(hotelService.RemoveHotel(id))
             return "Hotel was removed";
         return "Hotel not found";
     }
-    @PostMapping("/removeroom")
+    @PostMapping("/removeRoom")
     public String removeRoom(@RequestBody int id){
         if(hotelService.RemoveRoom(id))
             return "Room was removed";
         return "Room not found";
+    }
+    @PostMapping("/getBookingByUser")
+    public BookingEntity[] getAllBookingByUserLogin(String login){
+        return hotelService.getBookingByUserLogin(login);
     }
 }

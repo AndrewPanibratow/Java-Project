@@ -3,17 +3,20 @@ package com.website.hotel.services;
 import com.website.hotel.domain.BookingEntity;
 import com.website.hotel.domain.HotelEntity;
 import com.website.hotel.domain.RoomEntity;
+import com.website.hotel.domain.UserEntity;
+import com.website.hotel.exceptions.EmptyResult;
 import com.website.hotel.exceptions.NotValidParametersException;
 import com.website.hotel.repositories.BookingRepository;
 import com.website.hotel.repositories.HotelRepository;
 import com.website.hotel.repositories.RoomRepository;
+import com.website.hotel.repositories.UserRepository;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.crossstore.ChangeSetPersister;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @Transactional
@@ -21,10 +24,12 @@ public class HotelServiceImpl implements  HotelService {
    final HotelRepository hotelRepository;
    final RoomRepository roomRepository;
    final BookingRepository bookingRepository;
- public HotelServiceImpl(HotelRepository hotelRepository, RoomRepository roomRepository, BookingRepository bookingRepository){
+   final UserRepository userRepository;
+ public HotelServiceImpl(HotelRepository hotelRepository, RoomRepository roomRepository, BookingRepository bookingRepository, UserRepository userRepository){
      this.hotelRepository = hotelRepository;
      this.roomRepository = roomRepository;
      this.bookingRepository= bookingRepository;
+     this.userRepository = userRepository;
     }
     @Override
     public HotelEntity AddHotel(HotelEntity hotel) {
@@ -42,7 +47,7 @@ public class HotelServiceImpl implements  HotelService {
 
     @Override
     public BookingEntity BookingRoom(BookingEntity bookingEntity) {
-     Optional<BookingEntity[]> booking = bookingRepository.findAllByHotelIdAndRoomId(bookingEntity.getHotelId(), bookingEntity.getRoomId());
+     Optional<BookingEntity[]> booking = bookingRepository.findAllByHotelIdAndRoomId(bookingEntity.getHotel().getId(), bookingEntity.getRoom().getId());
         long bookingBeg =bookingEntity.getStartDate().getTime();
         long bookingEnd = bookingEntity.getEndDate().getTime();
         if(bookingBeg >= bookingEnd)
@@ -77,4 +82,11 @@ public class HotelServiceImpl implements  HotelService {
         roomRepository.delete(roomEntity.get());
         return true;
     }
+
+    @Override
+    public BookingEntity[] getBookingByUserLogin(String login) {
+    UserEntity userEntity = userRepository.findByLogin(login).orElseThrow(()->new UsernameNotFoundException("User not found!"));
+    return bookingRepository.findAllByUserId(userEntity.getId()).orElseThrow(()-> new EmptyResult("Booking not found!"));
+    }
+
 }

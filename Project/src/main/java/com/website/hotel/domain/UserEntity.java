@@ -28,9 +28,17 @@ public class UserEntity {
     @Size(min = 5, message = "Password must have at least 5 symbols!")
     @NotNull()
     private String password;
-    @NotNull
-    @Column(name="RoleId")
-    private long RoleId;
+
+    public RoleEntity getRoleEntity() {
+        return roleEntity;
+    }
+
+    public void setRoleEntity(RoleEntity roleEntity) {
+        this.roleEntity = roleEntity;
+    }
+    @ManyToOne
+    @JoinColumn(name="RoleId")
+    RoleEntity roleEntity;
 
     public UserEntity(Long id, String name, String surname, String email, String login, String password, long RoleId) {
         this.id = id;
@@ -39,7 +47,7 @@ public class UserEntity {
         this.email = email;
         this.login = login;
         this.password = password;
-        this.RoleId = RoleId;
+
     }
 
     public UserEntity(){
@@ -93,13 +101,4 @@ public class UserEntity {
     public void setPassword(String password) {
         this.password = password;
     }
-
-    public long getRoleId() {
-        return RoleId;
-    }
-
-    public void setRoleId(long roleId) {
-        RoleId = roleId;
-    }
-
 }

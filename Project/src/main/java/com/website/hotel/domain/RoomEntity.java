@@ -10,17 +10,18 @@ public class RoomEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
-    @Column(name ="HotelId")
-    long hotelId;
     float price;
     @Column(name="RoomType")
     String roomType;
     @Column(name = "BedsCount")
     int bedsCount;
 
-    public RoomEntity(long id,long hotelId, float price, String roomType, int bedsCount) {
+    @ManyToOne
+    @JoinColumn(name="HotelId")
+    HotelEntity hotel;
+
+    public RoomEntity(long id, float price, String roomType, int bedsCount) {
         this.id = id;
-        this.hotelId = hotelId;
         this.price = price;
         this.roomType = roomType;
         this.bedsCount = bedsCount;
@@ -35,14 +36,6 @@ public class RoomEntity {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public long getHotelId() {
-        return hotelId;
-    }
-
-    public void setHotelId(long hotelId) {
-        this.hotelId = hotelId;
     }
 
     public float getPrice() {
@@ -67,5 +60,13 @@ public class RoomEntity {
 
     public void setBedsCount(int beds_count) {
         this.bedsCount = beds_count;
+    }
+
+    public HotelEntity getHotel() {
+        return hotel;
+    }
+
+    public void setHotel(HotelEntity hotel) {
+        this.hotel = hotel;
     }
 }
