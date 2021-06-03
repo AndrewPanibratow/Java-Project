@@ -29,7 +29,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception{
         http.authorizeRequests().antMatchers("/").permitAll()
                 .antMatchers("/api/user/admin").hasRole("Admin")
-                .and().formLogin().defaultSuccessUrl("/api/user/welcomePage").and().logout().logoutUrl("/logout");
+                .and().formLogin().defaultSuccessUrl("/home/welcomePage").and().logout().logoutUrl("/logout");
 
     }
     @Bean

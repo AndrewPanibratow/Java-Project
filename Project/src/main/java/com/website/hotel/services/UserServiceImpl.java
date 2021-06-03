@@ -25,10 +25,18 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserEntity validateUser(String login, String password) throws AtAuthException {
-        Optional<UserEntity> user = userRepository.findByLoginAndPassword(login, password);
-        if(!user.isPresent())
-            return null;
-        return user.get();
+        Optional<UserEntity> user = userRepository.findByLogin(login);
+        if(user.isPresent())
+        {
+            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
+            UserEntity userEntity = user.get();
+            if(encoder.matches(password,userEntity.getPassword()))
+                return userEntity;
+            else
+                return null;
+        }
+        return null;
 
     }
 
@@ -53,11 +61,20 @@ public class UserServiceImpl implements UserService {
     }
     public boolean removeUser(String login, String password)
     {
-        UserEntity user = validateUser(login, password);
-        if(user == null)
-            return false;
-        userRepository.delete(user);
-        return true;
+        Optional<UserEntity> user = userRepository.findByLogin(login);
+        if(user.isPresent())
+        {
+            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
+            UserEntity userEntity = user.get();
+            if(encoder.matches(password,userEntity.getPassword())) {
+                userRepository.delete(userEntity);
+                return true;
+            }
+            else
+                return false;
+        }
+        return false;
     }
 
     @Override

@@ -36,7 +36,7 @@ public class UserController {
     public String RemoveUser(@RequestBody Map<String, String> data)
     {
         String login = data.get("login");
-        String password = DigestUtils.md5DigestAsHex(data.get("password").getBytes());
+        String password = data.get("password");
      if(userService.removeUser(login,password))
          return "User with login "+ data.get("login")+ " was deleted";
      else
@@ -45,7 +45,7 @@ public class UserController {
     @PostMapping("/login")
     public String LoginUser(@RequestBody Map<String, String> data){
         String login = data.get("login");
-        String password = DigestUtils.md5DigestAsHex(data.get("password").getBytes());
+        String password = data.get("password");
         UserEntity user = userService.validateUser(login, password);
         if(user != null)
             return "You login as "+user.getName() + " "+user.getSurname();
@@ -55,14 +55,5 @@ public class UserController {
     @PostMapping("/getAllUser")
     public List<UserEntity> getUsers(){
         return userService.getAllUser();
-    }
-
-    @GetMapping("/welcomePage")
-    public String welcomePage(){
-        StringBuilder sb = new StringBuilder();
-        sb.append("<h1>Hello ");
-        sb.append(SecurityContextHolder.getContext().getAuthentication().getName()+"</h1>");
-        sb.append("<a href=\"\\logout\">logout</a>");
-        return sb.toString();
     }
 }
