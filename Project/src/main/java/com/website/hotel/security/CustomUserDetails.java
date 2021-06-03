@@ -1,22 +1,11 @@
 package com.website.hotel.security;
-
-import com.sun.istack.NotNull;
 import com.website.hotel.domain.UserEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.util.DigestUtils;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
 
 public class CustomUserDetails implements UserDetails {
 
@@ -26,13 +15,13 @@ public class CustomUserDetails implements UserDetails {
     private String login;
     private String password;
     private String Role;
-    CustomUserDetails(UserEntity user, String Role){
+    CustomUserDetails(UserEntity user){
     this.name = user.getName();
     this.surname = user.getSurname();
     this.email = user.getEmail();
     this.login = user.getLogin();
     this.password = user.getPassword();
-    this.Role = Role;
+    this.Role = user.getRoleEntity().getRoleName();
     }
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

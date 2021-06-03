@@ -29,16 +29,28 @@ public class HotelController {
         return hotelService.BookingRoom(bookingEntityMap);
     }
     @PostMapping("/removeHotel")
-    public String removeHotel(@RequestBody int id){
+    public String removeHotel(long id){
         if(hotelService.RemoveHotel(id))
             return "Hotel was removed";
         return "Hotel not found";
     }
+    @PostMapping("/removeBooking")
+    public String removeBooking(long id){
+        if(hotelService.RemoveBooking(id))
+            return "Booking removed";
+        else
+            return "Booking not found";
+    }
     @PostMapping("/removeRoom")
-    public String removeRoom(@RequestBody int id){
+    public String removeRoom(long id){
         if(hotelService.RemoveRoom(id))
             return "Room was removed";
         return "Room not found";
+    }
+    @PostMapping("/getRoomByHotelId")
+    public RoomEntity[] getRoomByHotelId(long id)
+    {
+        return hotelService.getRoomsByHotelId(id);
     }
     @PostMapping("/getBookingByUser")
     public BookingEntity[] getAllBookingByUserLogin(String login){

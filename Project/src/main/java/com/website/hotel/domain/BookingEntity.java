@@ -14,11 +14,11 @@ public class BookingEntity {
     long id;
 
     @Column(name="StartDate")
-    @JsonFormat(pattern="dd-MM-yyyy")
+    @JsonFormat(pattern="dd.MM.yyyy")
     Date startDate;
 
     @Column(name="EndDate")
-    @JsonFormat(pattern="dd-MM-yyyy")
+    @JsonFormat(pattern="dd.MM.yyyy")
     Date endDate;
 
     @ManyToOne

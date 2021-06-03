@@ -10,7 +10,9 @@ public interface HotelService {
     HotelEntity AddHotel(HotelEntity hotel);
     RoomEntity AddRoom(RoomEntity room);
     BookingEntity BookingRoom(BookingEntity bookingEntity);
+    Boolean RemoveBooking(long id);
     Boolean RemoveHotel(long id);
     Boolean RemoveRoom(long id);
     BookingEntity[] getBookingByUserLogin(String login);
+    RoomEntity[] getRoomsByHotelId(long id);
 }

@@ -5,6 +5,7 @@ import com.website.hotel.domain.HotelEntity;
 import com.website.hotel.domain.RoomEntity;
 import com.website.hotel.domain.UserEntity;
 import com.website.hotel.exceptions.EmptyResult;
+import com.website.hotel.exceptions.NotFoundException;
 import com.website.hotel.exceptions.NotValidParametersException;
 import com.website.hotel.repositories.BookingRepository;
 import com.website.hotel.repositories.HotelRepository;
@@ -15,6 +16,7 @@ import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.client.HttpClientErrorException;
 
 import java.util.*;
 
@@ -24,12 +26,10 @@ public class HotelServiceImpl implements  HotelService {
    final HotelRepository hotelRepository;
    final RoomRepository roomRepository;
    final BookingRepository bookingRepository;
-   final UserRepository userRepository;
  public HotelServiceImpl(HotelRepository hotelRepository, RoomRepository roomRepository, BookingRepository bookingRepository, UserRepository userRepository){
      this.hotelRepository = hotelRepository;
      this.roomRepository = roomRepository;
      this.bookingRepository= bookingRepository;
-     this.userRepository = userRepository;
     }
     @Override
     public HotelEntity AddHotel(HotelEntity hotel) {
@@ -66,6 +66,15 @@ public class HotelServiceImpl implements  HotelService {
     }
 
     @Override
+    public Boolean RemoveBooking(long id) {
+        Optional<BookingEntity> bookingEntity = bookingRepository.findById(id);
+        if(!bookingEntity.isPresent())
+            return false;
+        bookingRepository.delete(bookingEntity.get());
+        return true;
+    }
+
+    @Override
     public Boolean RemoveHotel(long id) {
         Optional<HotelEntity> hotelEntity = hotelRepository.findById(id);
         if(!hotelEntity.isPresent())
@@ -85,8 +94,15 @@ public class HotelServiceImpl implements  HotelService {
 
     @Override
     public BookingEntity[] getBookingByUserLogin(String login) {
-    UserEntity userEntity = userRepository.findByLogin(login).orElseThrow(()->new UsernameNotFoundException("User not found!"));
-    return bookingRepository.findAllByUserId(userEntity.getId()).orElseThrow(()-> new EmptyResult("Booking not found!"));
+    return bookingRepository.findAllByUser_Login(login).orElseThrow(()-> new EmptyResult("Booking not found!"));
+    }
+
+    @Override
+    public RoomEntity[] getRoomsByHotelId(long id) {
+       HotelEntity hotel = hotelRepository.findById(id).orElseThrow(()->new NotFoundException("Rooms not found"));
+       RoomEntity[] rooms = new RoomEntity[hotel.getRooms().size()];
+       hotel.getRooms().toArray(rooms);
+       return rooms;
     }
 
 }

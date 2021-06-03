@@ -1,10 +1,12 @@
 package com.website.hotel.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "Hotel")
@@ -22,6 +24,9 @@ public class HotelEntity {
     @NotBlank(message = "Address is required!")
     @NotNull()
     String address;
+
+    @OneToMany(mappedBy = "hotel")
+    Set<RoomEntity> rooms;
 
     public HotelEntity(long id, String name, String country, int rooms_count, String address) {
         this.id = id;
@@ -63,6 +68,11 @@ public class HotelEntity {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    @JsonIgnore
+    public Set<RoomEntity> getRooms() {
+        return rooms;
     }
 
 }

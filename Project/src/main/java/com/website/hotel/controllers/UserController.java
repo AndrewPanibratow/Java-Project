@@ -21,7 +21,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping("/admin")
+    @GetMapping("/admin")
     public String Admin(){
         return "Hello admin!";
     }
